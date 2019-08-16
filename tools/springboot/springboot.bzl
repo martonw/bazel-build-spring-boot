@@ -51,10 +51,12 @@ _depaggregator_rule = rule(
 #  do not use directly, see the SpringBoot Macro below
 
 def _springboot_rule_impl(ctx):
-  outs = depset()
-  outs += ctx.attr.app_compile_rule.files
-  outs += ctx.attr.genmanifest_rule.files
-  outs += ctx.attr.genjar_rule.files
+
+  outs = depset([], transitive = [
+    ctx.attr.app_compile_rule.files, 
+    ctx.attr.genmanifest_rule.files, 
+    ctx.attr.genjar_rule.files
+  ])
 
   merged = java_common.merge([dep[java_common.provider] for dep in ctx.attr.deps])
   jars = merged.transitive_runtime_jars
