@@ -35,5 +35,6 @@ add_boot_actuator_starter(app_deps)
 springboot(
     name = "spring-boot-sample-jetty",
     boot_app_class = "hello.Application",
-    deps = app_deps
+    deps = app_deps,
+    language = "kotlin"
 )

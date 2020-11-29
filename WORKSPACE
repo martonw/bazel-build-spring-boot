@@ -1,3 +1,25 @@
+# This section will enable Kotlin
+
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+
+git_repository(
+    name = "io_bazel_rules_kotlin",
+    remote = "https://github.com/bazelbuild/rules_kotlin.git",
+    commit = "990fcc53689c8b58b3229c7f628f843a60cb9f5c",
+)
+load("@io_bazel_rules_kotlin//kotlin:kotlin.bzl", "kotlin_repositories", "kt_register_toolchains")
+
+KOTLIN_COMPILER_RELEASE = {
+    "urls": [
+        "https://github.com/JetBrains/kotlin/releases/download/v1.3.21/kotlin-compiler-1.3.21.zip",
+    ],
+    "sha256": "dbc7fbed67e0fa9a2f2ef6efd89fc1ef8d92daa38bb23c1f23914869084deb56",
+}
+
+kotlin_repositories(compiler_release = KOTLIN_COMPILER_RELEASE)
+kt_register_toolchains()
+
+
 # Nexus/Artifactory
 maven_server(
    name = "default",
@@ -15,14 +37,6 @@ maven_jar(
 maven_jar(
   name = "org_springframework_boot_spring_boot",
   artifact = "org.springframework.boot:spring-boot:1.5.10.RELEASE",
-)
-maven_jar(
-  name = "org_springframework_boot_spring_boot",
-  artifact = "org.springframework.boot:spring-boot:1.5.10.RELEASE",
-)
-maven_jar(
-  name = "org_springframework_boot_spring_boot_test",
-  artifact = "org.springframework.boot:spring-boot-test:1.5.10.RELEASE",
 )
 maven_jar(
   name = "org_springframework_boot_spring_boot_test",
@@ -2467,18 +2481,6 @@ maven_jar(
 maven_jar(
   name = "org_springframework_security_spring_security_web",
   artifact = "org.springframework.security:spring-security-web:4.2.4.RELEASE",
-)
-maven_jar(
-  name = "org_springframework_boot_spring_boot_starter_web",
-  artifact = "org.springframework.boot:spring-boot-starter-web:1.5.10.RELEASE",
-)
-maven_jar(
-  name = "org_springframework_boot_spring_boot_starter_test",
-  artifact = "org.springframework.boot:spring-boot-starter-test:1.5.10.RELEASE",
-)
-maven_jar(
-  name = "com_jayway_jsonpath_json_path",
-  artifact = "com.jayway.jsonpath:json-path:2.2.0",
 )
 
 
